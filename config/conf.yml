@@ -1,0 +1,32 @@
+defaults:
+  navisworks_exe: "C:\\Program Files\\Autodesk\\Navisworks Manage 2022\\FileToolsTaskRunner.exe"
+  signal_max_workers: 9
+  bim_agent_url: "http://host.docker.internal:8000"
+  export_files: &default_files
+    - "01.Сборка_Общая.rvt"
+    - "02.Сборка_Архитектура.rvt"
+    - "03.1 Сборка_Конструктив.rvt"
+    - "03.3 Сборка_Конструктив и Инженерные сети.rvt"
+    - "04.1 Сборка_Коробка здания.rvt"
+    - "04.2 Сборка_Коробка здания и Инженерные сети.rvt"
+    - "05.Сборка_Отопление и Вентиляция.rvt"
+    - "06.Сборка_Водоснабжение и Водоотведение.rvt"
+    - "07.Сборка_Общая Инженерные сети.rvt"
+    - "99_AS.rvt"
+    - "99_SC.rvt"
+
+projects:
+  KGN_GP06:
+    name: "Курган 5.2"
+    folder_name: KGN_GP5.2
+    export:
+      source_path: "C:\\Users\\dved\\Desktop\\RVT_ETL_tests\\KGN_GP5.2\\02_NWD"
+      output_path: "C:\\Users\\dved\\Desktop\\RVT_ETL_tests\\KGN_GP5.2\\KGN_GP5.2_nwd"
+      files: *default_files
+    signal:
+      project_id: "78048844-..."
+      folder_id: "0a2c3623-..."
+      filter: "Сборка"
+    checker:
+      xml_template: "Проверка_файлов.xml"
+      data_path: "\\\\fs\\bim\\...\\KGN_GP5.2"

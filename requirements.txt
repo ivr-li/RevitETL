@@ -1,0 +1,13 @@
+# BIM Agent (FastAPI)
+fastapi
+uvicorn
+
+# DAGs libs
+apache-airflow
+requests
+pandas
+openpyxl
+
+# Config
+pyyaml
+python-dotenv
