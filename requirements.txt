@@ -1,6 +1,7 @@
 # BIM Agent (FastAPI)
 fastapi
 uvicorn
+streamlit
 
 # DAGs libs
 apache-airflow

@@ -1,5 +1,5 @@
 ---
-# RevtiETL docker-compose
+# RevitETL docker-compose
 # Airflow (CeleryExecutor) + PostgreSQL + Redis + Superset + pgAdmin
 
 x-airflow-common: &airflow-common
@@ -29,8 +29,6 @@ x-airflow-common: &airflow-common
       condition: service_healthy
 
 services:
-  # ── Airflow ──────────────────────────────────────────────
-
   airflow-postgres:
     image: postgres:16
     environment:
@@ -174,8 +172,6 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  # ── PostgreSQL (project data) ────────────────────────────
-
   warehouse-postgres:
     image: postgres:16
     environment:
@@ -203,8 +199,6 @@ services:
     volumes:
       - ./client-postgres-init:/docker-entrypoint-initdb.d
 
-  # ── pgAdmin ─────────────────────────────────────────────
-
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -213,8 +207,6 @@ services:
     ports:
       - "5050:80"
     restart: unless-stopped
-
-  # ── Superset ────────────────────────────────────────────
 
   superset:
     image: apache/superset:4.1.1
