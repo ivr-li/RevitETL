@@ -1,7 +1,8 @@
-import streamlit as st
-from typing_extensions import Dict
+from typing import Any
 
-FORM_FIELDS = [
+import streamlit as st
+
+FORM_FIELDS: list[str] = [
     "name",
     "folder",
     "source",
@@ -17,18 +18,18 @@ FORM_FIELDS = [
 class ProjectForm:
     """Renders and collects project form fields."""
 
-    def __init__(self, prefix, project=None):
-        self.prefix = prefix
-        self.project = project or {}
+    def __init__(self, prefix: str, project: dict[str, Any] | None = None) -> None:
+        self.prefix: str = prefix
+        self.project: dict[str, Any] = project or {}
 
-    def render(self) -> dict:
+    def render(self) -> dict[str, Any]:
         self._render_general()
         self._render_export()
         self._render_signal()
         self._render_checker()
         return self._collect()
 
-    def _render_general(self):
+    def _render_general(self) -> None:
         col1, col2 = st.columns(2)
 
         with col1:
@@ -45,7 +46,7 @@ class ProjectForm:
                 key=f"{self.prefix}_folder",
             )
 
-    def _render_export(self):
+    def _render_export(self) -> None:
         st.subheader("Экспорт")
         export = self.project.get("export", {})
 
@@ -80,7 +81,7 @@ class ProjectForm:
                 key=f"{self.prefix}_files",
             )
 
-    def _render_signal(self):
+    def _render_signal(self) -> None:
         st.subheader("SIGNAL")
         signal = self.project.get("signal", {})
         col1, col2 = st.columns(2)
@@ -105,7 +106,7 @@ class ProjectForm:
             "Фильтр", value=signal.get("filter", "Сборка"), key=f"{self.prefix}_filter"
         )
 
-    def _render_checker(self):
+    def _render_checker(self) -> None:
         st.subheader("Checker")
         checker = self.project.get("checker", {})
 
@@ -115,7 +116,7 @@ class ProjectForm:
             key=f"{self.prefix}_dpath",
         )
 
-    def _collect(self):
+    def _collect(self) -> dict[str, Any]:
         s = st.session_state
         p = self.prefix
         use_defaults = s[f"{p}_defaults"]

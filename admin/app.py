@@ -5,15 +5,11 @@ from config import ConfigManager
 
 
 class AdminApp:
-    """Streamlit admin UI for managing projects in conf.yml."""
 
-    def __init__(self):
-        self.manager = ConfigManager()
+    def __init__(self) -> None:
+        self.manager: ConfigManager = ConfigManager()
 
-    def run(self):
-        """
-        Run the Streamlit app in browser
-        """
+    def run(self) -> None:
         st.set_page_config(page_title="RevitETL — Управление проектами", layout="wide")
         st.title("RevitETL — Управление проектами")
 
@@ -25,7 +21,7 @@ class AdminApp:
         with tab_add:
             self._render_add_form()
 
-    def _render_projects(self):
+    def _render_projects(self) -> None:
         if not self.manager.projects:
             st.info("Нет проектов. Добавьте первый во вкладке «Добавить проект».")
             return
@@ -36,12 +32,12 @@ class AdminApp:
                 updated = form.render()
                 self._render_action_buttons(key, updated)
 
-    def _render_action_buttons(self, key: str, updated: dict):
+    def _render_action_buttons(self, key: str, updated: dict) -> None:
         col_save, col_del, _ = st.columns([1, 1, 4])
 
         with col_save:
             if st.button("Сохранить", key=f"save_{key}"):
-                self.manager.update_project(key, updated)
+                self.manager.save_project(key, updated)
                 st.success("Сохранено")
                 st.rerun()
 
@@ -51,7 +47,7 @@ class AdminApp:
                 st.success(f"Проект {key} удалён")
                 st.rerun()
 
-    def _render_add_form(self):
+    def _render_add_form(self) -> None:
         new_key = st.text_input("ID проекта (ключ в YAML, например KGN_GP06)")
         if not new_key:
             return
@@ -64,14 +60,14 @@ class AdminApp:
                 st.error(f"Проект {new_key} уже существует")
                 return
 
-            self.manager.add_project(new_key, new_project)
+            self.manager.save_project(new_key, new_project)
             self._clear_new_form()
 
             st.success(f"Проект {new_key} добавлен")
             st.rerun()
 
     @staticmethod
-    def _clear_new_form():
+    def _clear_new_form() -> None:
         for field in FORM_FIELDS:
             key = f"new_{field}"
 
