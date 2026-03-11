@@ -26,7 +26,6 @@ class ProjectForm:
         self._render_general()
         self._render_export()
         self._render_signal()
-        self._render_checker()
         return self._collect()
 
     def _render_general(self) -> None:
@@ -46,25 +45,25 @@ class ProjectForm:
                 key=f"{self.prefix}_folder",
             )
 
+        st.text_input(
+            "Путь хранилищу",
+            value=self.project.get(
+                "output_path",
+                r"C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2",
+            ),
+            key=f"{self.prefix}_output",
+        )
+
     def _render_export(self) -> None:
-        st.subheader("Экспорт")
+        st.subheader("Экспорт RTV в NWD")
         export = self.project.get("export", {})
 
         st.text_input(
-            "Путь к RVT (source_path)",
+            "Путь к RVT",
             value=export.get(
                 "source_path", r"C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\02_NWD"
             ),
             key=f"{self.prefix}_source",
-        )
-
-        st.text_input(
-            "Путь для NWD (output_path)",
-            value=export.get(
-                "output_path",
-                r"C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\KGN_GP5.2_nwd",
-            ),
-            key=f"{self.prefix}_output",
         )
 
         st.checkbox(
@@ -82,7 +81,7 @@ class ProjectForm:
             )
 
     def _render_signal(self) -> None:
-        st.subheader("SIGNAL")
+        st.subheader("Отправка NWD в SignalDocs")
         signal = self.project.get("signal", {})
         col1, col2 = st.columns(2)
 
@@ -106,41 +105,37 @@ class ProjectForm:
             "Фильтр", value=signal.get("filter", "Сборка"), key=f"{self.prefix}_filter"
         )
 
-    def _render_checker(self) -> None:
-        st.subheader("Checker")
-        checker = self.project.get("checker", {})
-
-        st.text_input(
-            "Путь к данным (data_path)",
-            value=checker.get("data_path", ""),
-            key=f"{self.prefix}_dpath",
-        )
-
     def _collect(self) -> dict[str, Any]:
-        s = st.session_state
-        p = self.prefix
-        use_defaults = s[f"{p}_defaults"]
+        session = st.session_state
+        pref = self.prefix
+        use_defaults = session[f"{pref}_defaults"]
 
         if use_defaults:
             files = "USE_DEFAULTS"
         else:
-            raw = s.get(f"{p}_files", "")
+            raw = session.get(f"{pref}_files", "")
             files = [f.strip() for f in raw.strip().split("\n") if f.strip()]
 
+        output_path = session[f"{pref}_output"]
         return {
-            "name": s[f"{p}_name"],
-            "folder_name": s[f"{p}_folder"],
+            "name": session[f"{pref}_name"],
+            "folder_name": session[f"{pref}_folder"],
+            "output_path": output_path,
             "export": {
-                "source_path": s[f"{p}_source"],
-                "output_path": s[f"{p}_output"],
+                "source_path": session[f"{pref}_source"],
                 "files": files,
             },
             "signal": {
-                "project_id": s[f"{p}_pid"],
-                "folder_id": s[f"{p}_fid"],
-                "filter": s[f"{p}_filter"],
+                "project_id": session[f"{pref}_pid"],
+                "folder_id": session[f"{pref}_fid"],
+                "filter": session[f"{pref}_filter"],
             },
-            "checker": {
-                "data_path": s[f"{p}_dpath"],
+            "collisions": {
+                "coll_path": rf"{output_path}\collisions",
+                "data_path": rf"{output_path}\00_Data",
+            },
+            "modelchecker": {
+                "coll_path": rf"{output_path}\ModelChecker",
+                "data_path": rf"{output_path}\00_DataChecker",
             },
         }

@@ -19,13 +19,17 @@ projects:
   KGN_GP5.2:
     name: Курган 5.2
     folder_name: KGN_GP5.2
+    output_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2
     export:
       source_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\02_NWD
-      output_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\KGN_GP5.2_nwd
       files: *id001
     signal:
       project_id: 78048844-62a6-47e6-9f99-f9869fd875e2
       folder_id: 285c6b6f-303c-4f09-b54f-427696956396
       filter: Сборка
-    checker:
-      data_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\KGN_GP5.2_пересечки
+    collisions:
+      coll_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\collisions
+      data_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\00_Data
+    modelchecker:
+      coll_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\ModelChecker
+      data_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\00_DataChecker

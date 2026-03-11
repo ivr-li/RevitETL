@@ -5,7 +5,6 @@ from config import ConfigManager
 
 
 class AdminApp:
-
     def __init__(self) -> None:
         self.manager: ConfigManager = ConfigManager()
 
