@@ -1,7 +1,7 @@
 import streamlit as st
+from forms import FORM_FIELDS, ProjectForm
 
 from config import ConfigManager
-from forms import FORM_FIELDS, ProjectForm
 
 
 class AdminApp:
@@ -11,6 +11,9 @@ class AdminApp:
         self.manager = ConfigManager()
 
     def run(self):
+        """
+        Run the Streamlit app in browser
+        """
         st.set_page_config(page_title="RevitETL — Управление проектами", layout="wide")
         st.title("RevitETL — Управление проектами")
 
@@ -33,7 +36,7 @@ class AdminApp:
                 updated = form.render()
                 self._render_action_buttons(key, updated)
 
-    def _render_action_buttons(self, key, updated):
+    def _render_action_buttons(self, key: str, updated: dict):
         col_save, col_del, _ = st.columns([1, 1, 4])
 
         with col_save:

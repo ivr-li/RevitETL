@@ -12,12 +12,12 @@ class ConfigManager:
         self.path = path
         self.config = self._load()
 
-    def _load(self):
+    def _load(self) -> dict:
         with open(self.path, encoding="utf-8") as f:
             return yaml.safe_load(f)
 
     @property
-    def projects(self):
+    def projects(self) -> dict:
         return self.config.setdefault("projects", {})
 
     @property

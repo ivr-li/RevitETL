@@ -40,6 +40,31 @@ Docker (Linux)                              Windows Host
 └──────────────────────────────┘
 ```
 
+```
+        ┌─────────────┐
+        │  Streamlit  │
+        │  UI portal  │
+        └──────┬──────┘
+               │ REST
+               │
+        ┌──────▼──────┐
+        │   Airflow   │
+        │   API / UI  │
+        └──────┬──────┘
+               │
+ ┌─────────────▼─────────────┐
+ │        Airflow DAGs       │
+ │ export → upload → check   │
+ └─────────────┬─────────────┘
+               │
+        host.docker.internal
+               │
+        ┌──────▼──────┐
+        │  BIM Agent  │
+        │  FastAPI    │
+        └─────────────┘
+```
+
 ## Разделение ответственности
 
 **В Docker (Airflow)** — всё что не требует Windows:

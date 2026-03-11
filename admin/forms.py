@@ -1,4 +1,5 @@
 import streamlit as st
+from typing_extensions import Dict
 
 FORM_FIELDS = [
     "name",
@@ -20,7 +21,7 @@ class ProjectForm:
         self.prefix = prefix
         self.project = project or {}
 
-    def render(self):
+    def render(self) -> dict:
         self._render_general()
         self._render_export()
         self._render_signal()
@@ -89,6 +90,7 @@ class ProjectForm:
                 "Project ID",
                 value=signal.get("project_id", "Ввредите код project из ссылки"),
                 key=f"{self.prefix}_pid",
+                help="ID проекта из ссылки SIGNAL: https://docs.sgnl.pro/projects/<PROJECT_ID>/folders/<FOLDER_ID>",
             )
 
         with col2:
@@ -96,6 +98,7 @@ class ProjectForm:
                 "Folder ID",
                 value=signal.get("folder_id", "Ввредите код folder из ссылки"),
                 key=f"{self.prefix}_fid",
+                help="ID проекта из ссылки SIGNAL: https://docs.sgnl.pro/projects/<PROJECT_ID>/folders/<FOLDER_ID>",
             )
 
         st.text_input(
