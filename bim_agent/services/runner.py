@@ -1,24 +1,17 @@
 import subprocess
-from pathlib import Path
-from typing import Optional, Union,
-
-from bim_agent.services.config import DATA_NAME
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from typing import Optional, Union
+
+from bim_agent.services.config import DIRS
+
 
 class Runner:
-    def run_nwd_export(self,
-        foldefs: list[str],
-        output_path : Union[str, Path]
-    ) -> None:
-        tasks = [
-            NWDData(folder, output_path)
-            for folder in foldefs
-        ]
+    def run_nwd_export(self, foldefs: list[str], output_path: Union[str, Path]) -> None:
+        tasks = [NWDData(folder, output_path) for folder in foldefs]
 
         with ThreadPoolExecutor(max_workers=3) as pool_ex:
-            futures = {
-                pool_ex.submit(task.bat_activate): task for task in tasks
-            }
+            futures = {pool_ex.submit(task.bat_activate): task for task in tasks}
 
             for future in as_completed(futures):
                 task = futures[future]
@@ -42,7 +35,7 @@ class NWDData:
         else:
             pt = output_path
 
-        self.data_patch = pt / folder_name / DATA_NAME
+        self.data_patch = pt / folder_name / DIRS["nwd_data"]
         self.baf_file = self.data_patch / f"{folder_name}.bat"
         self.config = self.data_patch / f"{folder_name}.txt"
 
@@ -58,3 +51,9 @@ class CollisionsData:
 class ModelCheckerData:
     def __init__(self) -> None:
         pass
+
+
+Runner().run_nwd_export(
+    foldefs=["KGN_GP06"],
+    output_path=r"\\fs\bim\Projects\00.BIM_Export\Tests_zone",
+)
