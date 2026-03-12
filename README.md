@@ -246,8 +246,10 @@ projects:
 1. Адаптировать docker-compose.yaml (volume для config/, переменная BIM_AGENT_URL)
 2. Создать BIM Agent (FastAPI) с эндпоинтом `/api/export`
 3. Создать `config/projects.yaml` для 1-2 проектов
-4. Создать `dag_factory.py` — DAG с HttpOperator к BIM Agent
-5. Проверить: `docker-compose up` → Airflow UI → Trigger DAG → NWD файлы
+4. Cоздать основные моменты в `bim_agent`
+5. Создать `dag_factory.py` — DAG с HttpOperator к BIM Agent
+6. Проверить: `docker-compose up` → Airflow UI → Trigger DAG → NWD файлы
+docker-compose down && docker-compose up -d
 
 ### Фаза 2 — SIGNAL upload
 1. Рефакторинг старого main.py → `dags/lib/signal_upload.py`

@@ -130,12 +130,12 @@ class ProjectForm:
                 "folder_id": session[f"{pref}_fid"],
                 "filter": session[f"{pref}_filter"],
             },
-            "collisions": {
-                "coll_path": rf"{output_path}\collisions",
-                "data_path": rf"{output_path}\00_Data",
-            },
-            "modelchecker": {
-                "coll_path": rf"{output_path}\ModelChecker",
-                "data_path": rf"{output_path}\00_DataChecker",
-            },
+            # "collisions": {
+            #     "coll_path": rf"{output_path}\collisions",
+            #     "data_path": rf"{output_path}\00_Data",
+            # },
+            # "modelchecker": {
+            #     "coll_path": rf"{output_path}\ModelChecker",
+            #     "data_path": rf"{output_path}\00_DataChecker",
+            # },
         }

@@ -4,6 +4,7 @@ old_ex/
 .claude/
 CLAUDE.md
 .zed/
+airflow/dags/templs
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
