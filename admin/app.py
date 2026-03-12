@@ -12,6 +12,8 @@ class AdminApp:
         st.set_page_config(page_title="RevitETL — Управление проектами", layout="wide")
         st.title("RevitETL — Управление проектами")
 
+        self._render_global_settings()
+
         tab_list, tab_add = st.tabs(["Проекты", "Добавить проект"])
 
         with tab_list:
@@ -20,6 +22,35 @@ class AdminApp:
         with tab_add:
             self._render_add_form()
 
+    def _render_global_settings(self) -> None:
+        with st.sidebar:
+            st.header("Глобальные настройки")
+            output_path = st.text_input(
+                "Путь к хранилищу (output_path)",
+                value=self.manager.default_output_path,
+                key="global_output_path",
+            )
+            export_files = st.text_area(
+                "Файлы экспорта (по одному на строку)",
+                value="\n".join(self.manager.default_files),
+                height=200,
+                key="global_export_files",
+            )
+            xml_template = st.text_input(
+                "XML шаблон",
+                value=self.manager.default_xml_template,
+                key="global_xml_template",
+            )
+            if st.button("Сохранить настройки"):
+                files = [f.strip() for f in export_files.strip().split("\n") if f.strip()]
+                self.manager.save_defaults({
+                    "output_path": output_path,
+                    "export_files": files,
+                    "xml_template": xml_template,
+                })
+                st.success("Настройки сохранены")
+                st.rerun()
+
     def _render_projects(self) -> None:
         if not self.manager.projects:
             st.info("Нет проектов. Добавьте первый во вкладке «Добавить проект».")
@@ -27,7 +58,7 @@ class AdminApp:
 
         for key, data in self.manager.projects.items():
             with st.expander(f"{key} — {data.get('name', '')}", expanded=False):
-                form = ProjectForm(key, data)
+                form = ProjectForm(key, data, self.manager.default_output_path)
                 updated = form.render()
                 self._render_action_buttons(key, updated)
 
@@ -51,7 +82,7 @@ class AdminApp:
         if not new_key:
             return
 
-        form = ProjectForm("new")
+        form = ProjectForm("new", output_path=self.manager.default_output_path)
         new_project = form.render()
 
         if st.button("Добавить проект"):

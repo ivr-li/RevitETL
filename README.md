@@ -106,7 +106,31 @@ RevtiETL/
 ├── client-postgres-init/              # Скрипты инициализации БД
 └── old_ex/                            # Старый код (справочно)
 ```
+```
+00.BIM_Export/
+└── Курган 5.2/
+    ├── NWD/
+    │   ├── 00_Data/
+    │   │   ├── .txt
+    │   │   └── .bat
+    │   ├── 01.Сборка_Общая.nwd
+    │   ├── 02.Сборка_Архитектура.nwd
+    │   └── ...
+    ├── Collisions/
+    │   ├── 00_Data/
+    │   │   ├── archive1
+    │   │   ├── archive2
+    │   │   ├── ...
+    │   │   └── Проерка пересечений.xml
+    │   ├── .xml
+    │   ├── .xml
+    │   └── ...
+    └── ModelChecker/
+        └── 00_Data/
+            ├── DataFrame.xls
+            └── ...
 
+```
 ## Компоненты
 
 ### Docker-сервисы (docker-compose.yaml)

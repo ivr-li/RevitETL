@@ -10,6 +10,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "navisworks_exe": r"C:\Program Files\Autodesk\Navisworks Manage 2022\FileToolsTaskRunner.exe",
         "signal_max_workers": 9,
         "bim_agent_url": "http://host.docker.internal:8000",
+        "output_path": "",
         "export_files": [
             "01.Сборка_Общая.rvt",
             "02.Сборка_Архитектура.rvt",
@@ -39,8 +40,20 @@ class ConfigManager:
         return self.config.setdefault("projects", {})
 
     @property
+    def defaults(self) -> dict[str, Any]:
+        return self.config.setdefault("defaults", {})
+
+    @property
     def default_files(self) -> list[str]:
-        return self.config.get("defaults", {}).get("export_files", [])
+        return self.defaults.get("export_files", [])
+
+    @property
+    def default_output_path(self) -> str:
+        return self.defaults.get("output_path", "")
+
+    @property
+    def default_xml_template(self) -> str:
+        return self.defaults.get("xml_template", "")
 
     def save(self) -> None:
         self._resolve_default_files()
@@ -53,6 +66,10 @@ class ConfigManager:
                 default_flow_style=False,
                 sort_keys=False,
             )
+
+    def save_defaults(self, data: dict[str, Any]) -> None:
+        self.defaults.update(data)
+        self.save()
 
     def save_project(self, key: str, data: dict[str, Any]) -> None:
         self.projects[key] = data

@@ -6,7 +6,6 @@ FORM_FIELDS: list[str] = [
     "name",
     "folder",
     "source",
-    "output",
     "files",
     "pid",
     "fid",
@@ -18,9 +17,12 @@ FORM_FIELDS: list[str] = [
 class ProjectForm:
     """Renders and collects project form fields."""
 
-    def __init__(self, prefix: str, project: dict[str, Any] | None = None) -> None:
+    def __init__(
+        self, prefix: str, project: dict[str, Any] | None = None, output_path: str = ""
+    ) -> None:
         self.prefix: str = prefix
         self.project: dict[str, Any] = project or {}
+        self.output_path: str = output_path
 
     def render(self) -> dict[str, Any]:
         self._render_general()
@@ -44,15 +46,6 @@ class ProjectForm:
                 value=self.project.get("folder_name", "KGN_GP5.2"),
                 key=f"{self.prefix}_folder",
             )
-
-        st.text_input(
-            "Путь хранилищу",
-            value=self.project.get(
-                "output_path",
-                r"C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2",
-            ),
-            key=f"{self.prefix}_output",
-        )
 
     def _render_export(self) -> None:
         st.subheader("Экспорт RTV в NWD")
@@ -116,11 +109,10 @@ class ProjectForm:
             raw = session.get(f"{pref}_files", "")
             files = [f.strip() for f in raw.strip().split("\n") if f.strip()]
 
-        output_path = session[f"{pref}_output"]
         return {
             "name": session[f"{pref}_name"],
             "folder_name": session[f"{pref}_folder"],
-            "output_path": output_path,
+            "output_path": self.output_path,
             "export": {
                 "source_path": session[f"{pref}_source"],
                 "files": files,
