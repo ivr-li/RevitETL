@@ -33,7 +33,7 @@ class AdminApp:
             export_files = st.text_area(
                 "Файлы экспорта (по одному на строку)",
                 value="\n".join(self.manager.default_files),
-                height=200,
+                height=420,
                 key="global_export_files",
             )
             xml_template = st.text_input(
@@ -42,12 +42,16 @@ class AdminApp:
                 key="global_xml_template",
             )
             if st.button("Сохранить настройки"):
-                files = [f.strip() for f in export_files.strip().split("\n") if f.strip()]
-                self.manager.save_defaults({
-                    "output_path": output_path,
-                    "export_files": files,
-                    "xml_template": xml_template,
-                })
+                files = [
+                    f.strip() for f in export_files.strip().split("\n") if f.strip()
+                ]
+                self.manager.save_defaults(
+                    {
+                        "output_path": output_path,
+                        "export_files": files,
+                        "xml_template": xml_template,
+                    }
+                )
                 st.success("Настройки сохранены")
                 st.rerun()
 

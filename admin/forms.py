@@ -66,10 +66,12 @@ class ProjectForm:
         )
 
         if not st.session_state[f"{self.prefix}_defaults"]:
+            files_value = "\n".join(export.get("files", []))
+            line_count = max(files_value.count("\n") + 1, 3)
             st.text_area(
                 "Файлы (по одному на строку)",
-                height=120,
-                value="\n".join(export.get("files", [])),
+                height=line_count * 25 + 20,
+                value=files_value,
                 key=f"{self.prefix}_files",
             )
 
