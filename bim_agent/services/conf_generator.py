@@ -3,8 +3,9 @@ from pathlib import Path
 from bim_agent.services.config import DIRS, NAVISWORKS_EXE, PROJECTS
 
 BAT_TEMPLATE = (
-    'del "{nwd_dir}\\*.nwd"\n'
-    'del "{nwc_dir}\\*.nwc"\n'
+    "chcp 65001 >nul\n"
+    'pushd "{nwd_dir}" && del /q *.nwd 2>nul & popd\n'
+    'pushd "{nwc_dir}" && del /q *.nwc 2>nul & popd\n'
     "\n"
     'start "{name} Экспорт NWD"^\n'
     ' "{navisworks_exe}"^\n'
@@ -54,7 +55,7 @@ def create_project_dirs():
         )
 
         bat_path = root / DIRS["nwd_data"] / f"{id}.bat"
-        Path(bat_path).write_text(bat_content, encoding="utf-8")
+        Path(bat_path).write_text(bat_content, encoding="utf-8-sig")
 
 
 create_project_dirs()
