@@ -30,17 +30,20 @@ class AdminApp:
                 value=self.manager.default_output_path,
                 key="global_output_path",
             )
+
             export_files = st.text_area(
                 "Файлы экспорта (по одному на строку)",
                 value="\n".join(self.manager.default_files),
                 height=420,
                 key="global_export_files",
             )
+
             xml_template = st.text_input(
                 "XML шаблон",
                 value=self.manager.default_xml_template,
                 key="global_xml_template",
             )
+
             if st.button("Сохранить настройки"):
                 files = [
                     f.strip() for f in export_files.strip().split("\n") if f.strip()
