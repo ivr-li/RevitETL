@@ -7,7 +7,9 @@ CLAUDE.md
 airflow/dags/templs
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
-
+config/02_Проверки_v4.1.xml
+config/03_Быстрый показ свойств.xml
+config/KRGN_GP5.2_Проверка на пересечения.xml
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
