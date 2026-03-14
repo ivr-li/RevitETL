@@ -1,18 +1,21 @@
+using System;
+using System.Collections.Generic;
+
 namespace ClashRunner.Shared
 {
     public class ClashResultEntry
     {
         public string TestName { get; set; }
         public string ClashName { get; set; }
+        public string Guid { get; set; }
         public string Status { get; set; }
+        public string StatusLocalized { get; set; }
+        public string Description { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        public string Item1Path { get; set; }
-        public string Item2Path { get; set; }
-        public string Item1Layer { get; set; }
-        public string Item2Layer { get; set; }
         public double Distance { get; set; }
-        public string GridLocation { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public List<ClashObjectInfo> ClashObjects { get; set; } = new List<ClashObjectInfo>();
     }
 }

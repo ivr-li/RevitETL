@@ -5,6 +5,8 @@ namespace ClashRunner.Shared
     public class ClashTestSummary
     {
         public string TestName { get; set; }
+        public string TestType { get; set; }
+        public string TestStatus { get; set; }
         public int TotalClashes { get; set; }
         public int NewCount { get; set; }
         public int ActiveCount { get; set; }
