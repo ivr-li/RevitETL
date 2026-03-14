@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net47</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>ClashRunner.Automation</RootNamespace>
+  </PropertyGroup>
+
+  <!--
+    Navisworks Manage 2022 API references.
+    Adjust paths if your Navisworks is installed elsewhere.
+  -->
+  <ItemGroup>
+    <Reference Include="Autodesk.Navisworks.Automation">
+      <HintPath>C:\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.Automation.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Autodesk.Navisworks.Api">
+      <HintPath>C:\Program Files\Autodesk\Navisworks Manage 2022\Autodesk.Navisworks.Api.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClashRunner.Shared\ClashRunner.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

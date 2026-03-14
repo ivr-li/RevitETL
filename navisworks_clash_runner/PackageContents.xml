@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Navisworks Application Plugin manifest.
+  Deploy to: %AppData%\Autodesk\ApplicationPlugins\ClashRunner.bundle\PackageContents.xml
+-->
+<ApplicationPackage
+  SchemaVersion="1.0"
+  ProductType="Navisworks"
+  AutodeskProduct="NavisworksManage"
+  Name="ClashRunner"
+  Description="Automated clash detection runner"
+  AppVersion="1.0.0"
+  FriendlyVersion="1.0.0">
+
+  <CompanyDetails Name="RevtiETL" />
+
+  <Components Description="Main components">
+    <RuntimeRequirements
+      OS="Win64"
+      Platform="Navisworks"
+      SeriesMin="Nw19"
+      SeriesMax="Nw25" />
+    <ComponentEntry ModuleName="./Contents/ClashRunner.Plugin.dll" />
+  </Components>
+
+</ApplicationPackage>
