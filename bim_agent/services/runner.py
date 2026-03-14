@@ -44,13 +44,16 @@ class NWDData:
         self.log_file = self.data_path / f"{folder_name}.log"
 
     def run(self) -> None:
+        if self.log_file.exists():
+            self.log_file.unlink()
         self._start_bat()
         self._wait_for_log()
 
     def _start_bat(self) -> None:
+        path = str(self.data_path)
         subprocess.run(
             ["cmd", "/c", str(self.bat_file)],
-            cwd=str(self.data_path),
+            cwd=None if path.startswith("\\\\") else path,
             check=True,
         )
 
@@ -59,6 +62,7 @@ class NWDData:
         while elapsed < LOG_POLL_TIMEOUT:
             if self._is_complete():
                 return
+
             time.sleep(LOG_POLL_INTERVAL)
             elapsed += LOG_POLL_INTERVAL
 
@@ -67,7 +71,9 @@ class NWDData:
     def _is_complete(self) -> bool:
         if not self.log_file.exists():
             return False
+
         content = self.log_file.read_text(encoding="utf-8", errors="ignore")
+
         return COMPLETE_MARKER in content
 
 
