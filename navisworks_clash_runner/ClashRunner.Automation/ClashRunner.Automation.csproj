@@ -5,6 +5,7 @@
     <TargetFramework>net47</TargetFramework>
     <LangVersion>latest</LangVersion>
     <RootNamespace>ClashRunner.Automation</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <!--

@@ -52,7 +52,7 @@ namespace ClashRunner.Plugin
             }
 
             Console.WriteLine($"Importing clash settings from: {xmlPath}");
-            clash.TestsData.TestsImportXml(xmlPath);
+            clash.TestsData.TestsImportFromXml(xmlPath);
         }
 
         private static void RunAllTests(DocumentClash clash)
@@ -142,7 +142,7 @@ namespace ClashRunner.Plugin
                 Item2Path = GetItemPath(result.CompositeItem2),
                 Item1Layer = GetItemLayer(result.CompositeItem1),
                 Item2Layer = GetItemLayer(result.CompositeItem2),
-                GridLocation = result.GridIntersect ?? ""
+                GridLocation = ""
             };
         }
 
