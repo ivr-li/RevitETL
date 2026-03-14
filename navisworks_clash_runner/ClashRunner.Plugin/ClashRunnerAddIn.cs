@@ -43,29 +43,26 @@ namespace ClashRunner.Plugin
             }
         }
 
-        private static void ImportClashSettings(DocumentClash clash, string xmlPath)
+        private static void ImportClashSettings(DocumentClash clash, string templatePath)
         {
-            if (string.IsNullOrEmpty(xmlPath) || !File.Exists(xmlPath))
+            if (string.IsNullOrEmpty(templatePath) || !File.Exists(templatePath))
             {
-                Console.WriteLine("No clash settings XML — using existing tests.");
+                Console.WriteLine("No clash template — using existing tests.");
                 return;
             }
 
-            Console.WriteLine($"Importing clash settings from: {xmlPath}");
-            clash.TestsData.TestsImportFromXml(xmlPath);
+            // TODO: implement clash test import from template
+            // Navisworks 2022 API does not have XML import for clash tests.
+            // Options: load tests from a template .nwf via TestsAddCopy,
+            // or build ClashTest objects programmatically.
+            Console.WriteLine($"Clash template provided: {templatePath} (import not yet implemented)");
         }
 
         private static void RunAllTests(DocumentClash clash)
         {
             var tests = GetClashTests(clash);
-
             Console.WriteLine($"Running {tests.Count} clash tests...");
-
-            foreach (var test in tests)
-            {
-                Console.WriteLine($"  Running: {test.DisplayName}");
-                clash.TestsData.TestsRunTest(test);
-            }
+            clash.TestsData.TestsRunAllTests();
         }
 
         private static List<ClashTest> GetClashTests(DocumentClash clash)
