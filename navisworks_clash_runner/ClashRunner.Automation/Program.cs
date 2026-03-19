@@ -8,7 +8,7 @@ namespace ClashRunner.Automation
 {
     internal class Program
     {
-        private const string PluginId = "ClashRunner.Plugin.ClashRunnerAddIn";
+        private const string PluginId = "ADSK.ClashRunner.Plugin.ClashRunnerAddIn";
         private const string NwfFileName = "Проверка пересечений.nwf";
 
         static int Main(string[] args)

@@ -31,6 +31,12 @@ ClashRunner.Automation.exe ^
   --clash-settings "\\fs\bim\Templates\clash_tests.xml" ^
   --output "\\fs\bim\Projects\KGN_GP5.2\02_Collisions"
 ```
+```bash
+C:/path/to/ClashRunner.Automation/bin/Release/ClashRunner.Automation.exe \
+  --nwd-dir "C:/Projects/01_NWD" \
+  --output "C:/Projects/02_Collisions"\
+  --clash-settings "\\fs\bim\Templates\clash_tests.xml" ^
+```
 
 ### Arguments
 
