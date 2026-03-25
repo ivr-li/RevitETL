@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MCSettings AllowRequired="True" Name="Проверка файла АР" Author="Чернова" Description="Общая проверка файлов АР" Image="\\fs\public\Холдинг\ПоревитД\ТИМ\01_Библиотека\01_Рабочие задачи\ALL_Общие проверки файлов\Логотип\Логотип Rooms.png" LastModified="133584291472847213">
+  <Heading ID="bd63fb96-1720-4551-86cf-e1079753f6ec" HeadingText="&lt;--Unused--&gt;" Description="Checks that have been created but not placed in the structure yet." IsChecked="True">
+    <Section ID="b65c05d8-e7b4-4b84-9631-c34510280c20" SectionName="&lt;--Unused--&gt;" Title="Checks that have not been placed" IsChecked="True" Description="" />
+  </Heading>
+  <Heading ID="b3c08e07-cbb3-4915-838d-e7d90099a3a4" HeadingText="Информация" Description="" IsChecked="True">
+    <Section ID="56c22409-2b28-4f48-b0e7-f42569f93bc0" SectionName="Инфо о проекте" Title="" IsChecked="True" Description="">
+      <Check ID="9e77718f-4d04-444e-b10e-99a99593590f" CheckName="Типы связей" Description="Не должно быть связей с типом прикрепление!" FailureMessage="" ResultCondition="FailMatchingElements" CheckType="LinkMethod" IsRequired="False" IsChecked="True" />
+      <Check ID="77f33036-f5bf-4ab8-bd04-43f671db501d" CheckName="Координаты проекта" Description="Сообщит координаты точки съёмки и базовой точки проекта, отметку и истинный север." FailureMessage="" ResultCondition="FailMatchingElements" CheckType="ProjectCoordinates" IsRequired="False" IsChecked="True" />
+      <Check ID="69bcd5df-664f-40d9-9daa-901427cbf2ce" CheckName="Связанные файлы DWG" Description="Отобразит список связанных файлов DWG в модели." FailureMessage="" ResultCondition="FailMatchingElements" CheckType="LinkedCad" IsRequired="False" IsChecked="True" />
+      <Check ID="b5149dd1-19fa-421e-ab9e-a3465404ecc7" CheckName="Рабочие наборы" Description="Список всех рабочих наборов в модели, либо '*Not Workshared*', если файл не предназначен для совместной работы. Опция: количество элементов в каждом рабочем наборе." FailureMessage="" ResultCondition="FailMatchingElements" CheckType="Worksets" IsRequired="False" IsChecked="True">
+        <PrebuiltOptions ShowCount="False" />
+      </Check>
+      <Check ID="d074d934-aad5-46e2-b1b0-3a9e6d9ecf9f" CheckName="Закрепленные связи" Description="Сообщит о любых связях, которые не закреплены." FailureMessage="" ResultCondition="FailMatchingElements" CheckType="PinnedLinks" IsRequired="False" IsChecked="True" />
+      <Check ID="31b4854a-e4a5-49cc-8960-9c152d726628" CheckName="Количество предупреждений" Description="Список всех предупреждений в модели." FailureMessage="" ResultCondition="FailMatchingElements" CheckType="WarningCount" IsRequired="False" IsChecked="True">
+        <PrebuiltOptions ShowList="False" />
+      </Check>
+    </Section>
+  </Heading>
+  <Heading ID="05eda29e-4862-4bb0-87ad-d3c990a78887" HeadingText="Проверка модели общая" Description="" IsChecked="True">
+    <Section ID="04382f9b-59c0-4db0-8c7e-d0e465753255" SectionName="Проверка размещения помещений" Title="" IsChecked="True" Description="">
+      <Check ID="cea4a5c6-9a0a-4336-8991-0ddd90ebe808" CheckName="Проверка отсутствия неразмещенных помещений" Description="" FailureMessage="Данные помещения удалены с вида, но не удалены из спецификации." ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="71729f22-62c5-482d-b9ef-2cc70df5a22e" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="fe1da88b-8c1b-4833-ac5a-6301a6c8afbf" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="0435828a-456f-4430-88db-04bceec88160" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasNoValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+      <Check ID="fa0e40f8-ec9d-48f2-bb0f-dee2cf0edb10" CheckName="Проверка отсутствия помещений, которые не окружены" Description="" FailureMessage="Данные помещения не имеют очерченных границ" ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="e219fd7a-66c7-4502-b2b1-a3d972c75271" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="65207f8b-00cc-4c34-823e-feaff03220a6" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="81378ee5-3054-48f9-b727-b87fb5668012" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="2c3e1b89-83f8-4986-a295-a49a7d0d2ed3" Operator="And" Category="Parameter" Property="Площадь" Condition="HasValue" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+      <Check ID="fdde0539-6e36-430e-9c66-9e312fc940e1" CheckName="Проверка стадии у размещенных помещений" Description="" FailureMessage="Если выдает ошибку и у помещений стадия &quot;Помещения не созданы&quot; или &quot;Помещения удалены&quot; нужно пересоздать помещения на другом плане с нужной стадией или проверить порядок стадий в файле." ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="9c90c786-f6ad-4548-9bb4-3fb8c966bb3f" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="b790d93a-4c48-4d4c-9936-006c9b31c43b" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="ac93ee8d-4334-48d8-836d-6455a1a0b932" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="c1f959d3-25ea-4c61-bf93-ed98d4e41fe3" Operator="And" Category="Parameter" Property="Площадь" Condition="HasValue" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="82a2fd51-5312-406e-b3e9-f3148f892049" Operator="And" Category="PhaseCreated" Property="Name" Condition="DoesNotContain" Value="Помещения удалены" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="a8372376-2032-4b43-8caa-b483af126225" Operator="And" Category="PhaseCreated" Property="Name" Condition="DoesNotContain" Value="Помещения не созданы" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="ac032ac4-e37a-41e8-95c7-24bb15b5817d" Operator="And" Category="PhaseCreated" Property="Name" Condition="DoesNotContain" Value="Существующие" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+    </Section>
+  </Heading>
+  <Heading ID="d86af83c-0dff-44b6-bdaa-c85d788e71b2" HeadingText="Проверка заполнения параметров для АР" Description="" IsChecked="True">
+    <Section ID="7b3a79f9-a456-4c21-9fce-eee36e5da19c" SectionName="Проверка заполненности параметров" Title="" IsChecked="True" Description="">
+      <Check ID="1bbab43a-4ddb-4ad1-9d6c-c4d5739906aa" CheckName="Проверка заполненности параметра ADSK_Номер секции" Description="" FailureMessage="У данных помещений не заполнен параметр &quot;ADSK_Номер секции&quot;" ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="5cf8a407-4b28-4edf-aee2-d9c15d5093fe" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="9c8809cf-3c1b-42f3-b668-4a4dc36b300c" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="aa471728-5b5b-4533-bf75-caac3ff0f95d" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="636c3458-9f00-4551-ac1d-3056e13db1b3" Operator="And" Category="Parameter" Property="ADSK_Номер секции" Condition="HasNoValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+      <Check ID="e1e570c3-2f3a-4b68-9b7d-a1d543513a63" CheckName="Проверка заполненности параметра ADSK_Этаж" Description="" FailureMessage="У данных помещений не заполнен параметр &quot;ADSK_Этаж&quot;" ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="b79eb28e-c1c6-462b-b41e-995b571e180c" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="3813084e-a417-416a-b298-0919327f20b4" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="12a8220e-6008-4784-97ce-5cf2e870973a" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="4c050a5d-1430-4c3a-b310-bc683e2719dd" Operator="And" Category="Parameter" Property="ADSK_Этаж" Condition="HasNoValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+      <Check ID="72c8acf9-73e1-462e-bf68-5aa51c32af0c" CheckName="Проверка заполненности параметра &quot;Стиль комнат&quot;" Description="Из проверки исключены Террасы, Тех.подполье и Холодное подполье" FailureMessage="У данных помещений не заполнен параметр &quot;Стиль комнат&quot;" ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="2bdcad0d-e3a0-46ef-8fca-d13d26cda8e8" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="a2a85fcf-bc02-4e0f-bfe7-7f860076e301" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="c7b78bed-c916-41b0-ab55-5189c2f1bce6" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="ede9d972-7695-4ac4-9a28-074ae2aeaf4b" Operator="And" Category="Parameter" Property="Стиль комнат" Condition="HasNoValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="ed92d698-a549-400c-bfb8-fb2e843061f4" Operator="And" Category="Parameter" Property="ROOM_NAME" Condition="DoesNotContain" Value="подполье" CaseInsensitive="True" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="90732e83-ce5f-4ea7-9569-2e0cf8dfc809" Operator="And" Category="Parameter" Property="ROOM_NAME" Condition="DoesNotContain" Value="Терраса" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+      <Check ID="1fff16b6-59e9-4a5b-8843-068f31bdf4d2" CheckName="Проверка заполненности параметра &quot;Отделка пола&quot;" Description="Из проверки исключены Тех.подполье и Холодное подполье" FailureMessage="У данных помещений не заполнен параметр &quot;Отделка пола&quot;" ResultCondition="FailMatchingElements" CheckType="Custom" IsRequired="True" IsChecked="True">
+        <Filter ID="c9c253bb-d07f-4c6a-9387-c050444f704e" Operator="And" Category="Category" Property="OST_Rooms" Condition="Included" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="f457b5ec-a04f-4643-86ce-4346bd1c6c31" Operator="And" Category="TypeOrInstance" Property="Is Element Type" Condition="Equal" Value="False" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="d1598f61-43da-47f6-8e1e-7b46ec790861" Operator="And" Category="Parameter" Property="ROOM_LEVEL_ID" Condition="HasValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="f1447dac-66eb-4d56-84e7-b25831fce961" Operator="And" Category="Parameter" Property="Отделка пола" Condition="HasNoValue" Value="True" CaseInsensitive="False" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+        <Filter ID="c5e42606-6927-4305-b8b7-81e5fb663ea9" Operator="And" Category="Parameter" Property="ROOM_NAME" Condition="DoesNotContain" Value="подполье" CaseInsensitive="True" Unit="None" UnitClass="None" FieldTitle="" UserDefined="False" Validation="None" />
+      </Check>
+    </Section>
+  </Heading>
+</MCSettings>

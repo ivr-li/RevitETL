@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<exchange xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://download.autodesk.com/us/navisworks/schemas/nw-exchange-12.0.xsd" units="ft" filename="" filepath="">
+  <selectionsets>
+    <viewfolder name="АР" guid="bf5f043b-a620-43eb-8993-78b5a5b28995">
+      <selectionset name="Бетонные перемычки" guid="af723bc3-6c93-4ee2-8409-a9db5acf3500">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">БетонныеПеремычки</data>
+              </value>
+            </condition>
+          </conditions>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Блок 250" guid="d6716823-696e-4bbf-9b57-a4fde3d3b707">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Базовая стена</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Блок</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Силикат</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">250</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Блок 180" guid="aa9ea4b5-c7a4-4c24-aefe-1636cf666a2a">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Базовая стена</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Блок</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Силикат</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">180</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Блок 80" guid="fbb098cc-085f-4f96-b4c6-a9be4f93a4fc">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Базовая стена</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Блок</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Силикат</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">80</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Газобетон 200" guid="1c474eb3-2968-4e96-9654-8b6e2acb8b6e">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Базовая стена</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Блок</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Газобетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">200</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Газобетон 400" guid="1a0b204c-8c52-479b-a361-0d418b20a4e1">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Базовая стена</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Блок</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Газобетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">400</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+    </viewfolder>
+    <viewfolder name="КЖ" guid="9fdd0d77-adce-4c9b-86a5-5ae5d93932f1">
+      <selectionset name="Бетонные элементы" guid="2ce0883c-2dc2-4c79-a7ef-c2c8cfcbce63">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitMaterialProperties">Материал Revit</name>
+              </category>
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Бетон не перекрытия" guid="c876a9e2-b27f-44d4-913a-2ed348036a27">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitMaterialProperties">Материал Revit</name>
+              </category>
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Бетон</data>
+              </value>
+            </condition>
+            <condition test="not_equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseUserName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">Перекрытие</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Стены_Бетон" guid="683e530f-5ac8-4450-9670-d8078875c9aa">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Стены</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Каркас несущий_Бетон" guid="80766788-1e98-4c44-9e0d-1eb762f7b4b1">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Каркас несущий</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Фундамент_Бетон" guid="8fbb842e-616f-4746-92f2-a85e02a220ce">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Фундамент</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Обобщенные модели_Бетон" guid="f575e268-a7be-4783-88d9-05737da1c974">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Обобщенные модели</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Перекрытия_Бетон" guid="6d314de8-6964-4f55-b17c-cd1e4343f28d">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Перекрытия</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Несущие колонны_Бетон" guid="eec98a26-359a-46c2-a454-926e447d120b">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Несущие колонны</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Сборные марши" guid="2a894f04-4a33-4868-85d7-f8ed1a63715e">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementCategory">Категория</name>
+              </property>
+              <value>
+                <data type="wstring">Обобщенные модели</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Марш</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Лестничные площадки" guid="f91e454f-aabc-4730-b2f7-7a494b3da222">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Перекрытия</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeMaterial">Материал</name>
+              </property>
+              <value>
+                <data type="wstring">PS_Бетон</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Арх</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1001203">Марка</name>
+              </property>
+              <value>
+                <data type="wstring">ЛП</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+    </viewfolder>
+    <viewfolder name="ВК" guid="1872de2c-c995-4363-b29e-6cbf9e2c5725">
+      <selectionset name="Трубы ВК" guid="3982d91e-2d90-44fb-9ecc-68b6207ee18a">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Соединения труб ВК" guid="3cd92ecb-09b6-4da8-8018-377d11e76fcd">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Соединительные детали трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Трубы ВК без Дренажа" guid="f6d7d0b0-fb26-47b5-8543-2b4d683054bf">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К13</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Соединения труб ВК без Дренажа" guid="263af326-a7d1-4be8-ab43-16a9bad3f1c7">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Соединительные детали трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К13</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Трубы Водоснабжение" guid="788ed9ec-d050-40de-8765-46b4df3ce7f3">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Соединения труб Водоснабжение" guid="04dfb5a1-03c5-452e-a065-075bd87eb11d">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Соединительные детали трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Трубы Канализация" guid="46dc947c-dd29-423d-be41-eb26218f8c11">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Трубы_ВК_Дренаж" guid="07086ae9-2d45-43d1-98c1-a3e419c5de07">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Водоснабжение</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="lcldrevit_parameter_-1140324">Имя системы</name>
+              </property>
+              <value>
+                <data type="wstring">К13</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+    </viewfolder>
+    <viewfolder name="ОВ" guid="86c2d679-6509-4324-8f9a-3c98cb109a69">
+      <selectionset name="КИВ" guid="9cfff86a-f40e-439e-a781-cb86a3f5d175">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementCategory">Категория</name>
+              </property>
+              <value>
+                <data type="wstring">Арматура воздуховодов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementName">Имя</name>
+              </property>
+              <value>
+                <data type="wstring">КИВ</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Воздуховоды прямоугольные" guid="b8a7af56-feeb-4d81-9be5-04f7685240e8">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementCategory">Категория</name>
+              </property>
+              <value>
+                <data type="wstring">Воздуховоды</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Шахта</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">детали</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">прямоуг</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Воздуховоды ОВ" guid="87b7d7df-6157-4cc8-a664-d67cfb649963">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementCategory">Категория</name>
+              </property>
+              <value>
+                <data type="wstring">Воздуховоды</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Шахта</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">детали</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Соединения воздуховодов ОВ" guid="c88ec889-24d8-4f82-8847-d6102675ed7c">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Соединительные детали воздуховодов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="42">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Шахта</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Трубы ОВ" guid="0b7cafe4-2f4b-4f60-b0e2-5ba4f367ced8">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Трубы</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementFamily">Семейство</name>
+              </property>
+              <value>
+                <data type="wstring">Типы трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Отопление</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+      <selectionset name="Соединения труб ОВ" guid="d3fb1cb5-a41b-47f0-8e59-9cf9633dd57c">
+        <findspec mode="all" disjoint="0">
+          <conditions>
+            <condition test="equals" flags="10">
+              <property>
+                <name internal="LcOaSceneBaseClassUserName">Тип</name>
+              </property>
+              <value>
+                <data type="wstring">Соединительные детали трубопроводов</data>
+              </value>
+            </condition>
+            <condition test="contains" flags="10">
+              <property>
+                <name internal="LcOaNodeSourceFile">Файл источника</name>
+              </property>
+              <value>
+                <data type="wstring">Отопление</data>
+              </value>
+            </condition>
+          </conditions>
+          <locator>/</locator>
+        </findspec>
+      </selectionset>
+    </viewfolder>
+    <viewfolder name="Э" guid="69e3f7cd-484c-4c0e-8744-017b6b65fcb0">
+      <selectionset name="Кабельные лотки" guid="4a1fe269-34db-427d-b905-0e0f0ca1194d">
+        <findspec mode="all" disjoint="1">
+          <conditions>
+            <condition test="contains" flags="26">
+              <category>
+                <name internal="LcRevitData_Element">Объект</name>
+              </category>
+              <property>
+                <name internal="LcRevitPropertyElementCategory">Категория</name>
+              </property>
+              <value>
+                <data type="wstring">кабель</data>
+              </value>
+            </condition>
+          </conditions>
+        </findspec>
+      </selectionset>
+    </viewfolder>
+  </selectionsets>
+</exchange>

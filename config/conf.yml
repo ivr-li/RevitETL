@@ -3,7 +3,7 @@ defaults:
   signal_max_workers: 9
   bim_agent_url: http://host.docker.internal:8000
   output_path: \\fs\bim\Projects\00.BIM_Export\Tests_zone
-  export_files: &id001
+  export_files:
     - 01.Сборка_Общая.rvt
     - 02.Сборка_Архитектура.rvt
     - 03.1 Сборка_Конструктив.rvt
@@ -16,6 +16,24 @@ defaults:
     - 99_AS.rvt
     - 99_SC.rvt
   xml_template: Проверка_файлов.xml
+  check_mappings:
+    02.Сборка_Архитектура.rvt:
+      - template: MC_01_Проверка файла AR для Архитектора.xml
+        output: Проверка AR для Архитектора.xlsx
+      - template: MC_02_Проверка файла AR для ПГС.xml
+        output: Проверка AR для ПГС.xlsx
+    99_SC.rvt:
+      - template: MC_03_Проверка файла SC.xml
+        output: Проверка SC.xlsx
+    99_AS.rvt:
+      - template: MC_04_Проверка файла AS.xml
+        output: Проверка SC_AS.xlsx
+    05.Сборка_Отопление и Вентиляция.rvt:
+      - template: MC_05_Проверка файла MEP.xml
+        output: Проверка ОВ.xlsx
+    06.Сборка_Водоснабжение и Водоотведение.rvt:
+      - template: MC_05_Проверка файла MEP.xml
+        output: Проверка ВК.xlsx
 projects:
   testp:
     name: Тестовая зона

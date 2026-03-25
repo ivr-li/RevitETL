@@ -25,6 +25,42 @@ DEFAULT_CONFIG: dict[str, Any] = {
             "99_SC.rvt",
         ],
         "xml_template": "Проверка_файлов.xml",
+        "check_mappings": {
+            "02.Сборка_Архитектура.rvt": [
+                {
+                    "template": "MC_01_Проверка файла AR для Архитектора.xml",
+                    "output": "Проверка AR для Архитектора.xlsx",
+                },
+                {
+                    "template": "MC_02_Проверка файла AR для ПГС.xml",
+                    "output": "Проверка AR для ПГС.xlsx",
+                },
+            ],
+            "99_SC.rvt": [
+                {
+                    "template": "MC_03_Проверка файла SC.xml",
+                    "output": "Проверка SC.xlsx",
+                },
+            ],
+            "99_AS.rvt": [
+                {
+                    "template": "MC_04_Проверка файла AS.xml",
+                    "output": "Проверка SC_AS.xlsx",
+                },
+            ],
+            "05.Сборка_Отопление и Вентиляция.rvt": [
+                {
+                    "template": "MC_05_Проверка файла MEP.xml",
+                    "output": "Проверка ОВ.xlsx",
+                },
+            ],
+            "06.Сборка_Водоснабжение и Водоотведение.rvt": [
+                {
+                    "template": "MC_05_Проверка файла MEP.xml",
+                    "output": "Проверка ВК.xlsx",
+                },
+            ],
+        },
     },
     "projects": {},
 }
@@ -54,6 +90,18 @@ class ConfigManager:
     @property
     def default_xml_template(self) -> str:
         return self.defaults.get("xml_template", "")
+
+    @property
+    def default_check_mappings(self) -> dict[str, list[dict[str, str]]]:
+        return self.defaults.get("check_mappings", {})
+
+    def _get_check_mappings_for_project(
+        self, project_key: str
+    ) -> dict[str, list[dict[str, str]]]:
+        project = self.projects.get(project_key, {})
+        return project.get("export", {}).get(
+            "check_mappings", self.default_check_mappings
+        )
 
     def save(self) -> None:
         self._resolve_default_files()

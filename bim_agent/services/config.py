@@ -28,4 +28,5 @@ DIRS = {
     "collisions_file": "Проверка на пересечения.xml",
     "model_checker": Path("03_ModelChecker"),
     "model_checker_data": Path("03_ModelChecker") / DATA_NAME,
+    "model_checker_temp": Path("00_Templates") / "model_checker",
 }

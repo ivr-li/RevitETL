@@ -7,15 +7,15 @@ CLAUDE.md
 airflow/dags/templs
 
 navisworks_clash_runner/.vs/
-navisworks_clash_runner/.vs/ClashRunner.Automation/bin/
-navisworks_clash_runner/.vs/ClashRunner.Automation/obj/
 
-navisworks_clash_runner/.vs/ClashRunner.Plugin/bin/
-navisworks_clash_runner/.vs/ClashRunner.Plugin/obj/
+navisworks_clash_runner/ClashRunner.Automation/bin/
+navisworks_clash_runner/ClashRunner.Automation/obj/
 
-navisworks_clash_runner/.vs/ClashRunner.Shared/bin/
-navisworks_clash_runner/.vs/ClashRunner.Shared/obj/
+navisworks_clash_runner/ClashRunner.Shared/bin/
+navisworks_clash_runner/ClashRunner.Shared/obj/
 
+navisworks_clash_runner/ClashRunner.Plugin/bin/
+navisworks_clash_runner/ClashRunner.Plugin/obj/
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 config/02_Проверки_v4.1.xml
