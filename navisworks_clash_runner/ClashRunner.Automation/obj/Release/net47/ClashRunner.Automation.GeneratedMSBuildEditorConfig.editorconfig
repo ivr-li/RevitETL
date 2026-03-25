@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = ClashRunner.Automation
+build_property.ProjectDir = C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

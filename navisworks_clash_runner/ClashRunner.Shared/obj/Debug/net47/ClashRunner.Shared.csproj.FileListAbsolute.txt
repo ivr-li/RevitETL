@@ -1,0 +1,10 @@
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\bin\Debug\net47\ClashRunner.Shared.dll
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\bin\Debug\net47\ClashRunner.Shared.pdb
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.csproj.AssemblyReference.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.AssemblyInfoInputs.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.AssemblyInfo.cs
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.csproj.CoreCompileInputs.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.sourcelink.json
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.dll
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Shared\obj\Debug\net47\ClashRunner.Shared.pdb

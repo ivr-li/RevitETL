@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Autodesk.Navisworks.Api.Automation;
 using ClashRunner.Shared;
 
@@ -8,7 +9,7 @@ namespace ClashRunner.Automation
 {
     internal class Program
     {
-        private const string PluginId = "ADSK.ClashRunner.Plugin.ClashRunnerAddIn";
+        private const string PluginId = "ADSK.ClashRunnerAddIn";
         private const string NwfFileName = "Проверка пересечений.nwf";
 
         static int Main(string[] args)
@@ -58,6 +59,8 @@ namespace ClashRunner.Automation
                     cli.OutputDirectory,
                     nwfPath);
 
+                DiagnoseBundlePaths();
+
                 Console.WriteLine("Executing clash plugin...");
                 navis.ExecuteAddInPlugin(PluginId, pluginArgs);
 
@@ -93,6 +96,68 @@ namespace ClashRunner.Automation
             {
                 Console.WriteLine($"  Appending: {Path.GetFileName(nwdFiles[i])}");
                 navis.AppendFile(nwdFiles[i]);
+            }
+        }
+
+        private static void DiagnoseBundlePaths()
+        {
+            Console.WriteLine("=== Plugin diagnostics ===");
+            Console.WriteLine("Looking for plugin: " + PluginId);
+
+            string[] searchDirs =
+            {
+                Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    @"Autodesk\ApplicationPlugins"),
+                Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                    @"Autodesk\ApplicationPlugins"),
+            };
+
+            foreach (string dir in searchDirs)
+            {
+                Console.WriteLine("Checking: " + dir);
+                string bundle = Path.Combine(dir, "ClashRunner.bundle");
+
+                if (!Directory.Exists(bundle))
+                {
+                    Console.WriteLine("  NOT FOUND");
+                    continue;
+                }
+
+                string manifest = Path.Combine(bundle, "PackageContents.xml");
+                Console.WriteLine("  PackageContents.xml: " + (File.Exists(manifest) ? "OK" : "MISSING"));
+
+                string dll = Path.Combine(bundle, @"Contents\ClashRunner.Plugin.dll");
+                Console.WriteLine("  ClashRunner.Plugin.dll: " + (File.Exists(dll) ? "OK" : "MISSING"));
+
+                if (!File.Exists(dll))
+                    continue;
+
+                TryLoadPluginDll(dll);
+            }
+
+            Console.WriteLine("===========================");
+        }
+
+        private static void TryLoadPluginDll(string dllPath)
+        {
+            try
+            {
+                var asm = Assembly.LoadFrom(dllPath);
+                Console.WriteLine("  DLL loaded OK: " + asm.FullName);
+
+                foreach (var type in asm.GetExportedTypes())
+                    Console.WriteLine("  Exported type: " + type.FullName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("  DLL LOAD FAILED: " + ex.Message);
+                if (ex is ReflectionTypeLoadException rtle)
+                {
+                    foreach (var le in rtle.LoaderExceptions)
+                        Console.WriteLine("    Loader: " + le.Message);
+                }
             }
         }
 

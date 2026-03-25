@@ -9,7 +9,7 @@ using ClashRunner.Shared;
 
 namespace ClashRunner.Plugin
 {
-    [PluginAttribute("ClashRunner.Plugin.ClashRunnerAddIn",
+    [PluginAttribute("ClashRunnerAddIn",
         "ADSK",
         DisplayName = "Clash Runner",
         ToolTip = "Runs clash tests and exports results")]

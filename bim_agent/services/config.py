@@ -25,6 +25,7 @@ DIRS = {
     "nwd_data": Path("01_NWD") / DATA_NAME,
     "collisions": Path("02_Collisions"),
     "collisions_data": Path("02_Collisions") / DATA_NAME,
+    "collisions_file": "Проверка на пересечения.xml",
     "model_checker": Path("03_ModelChecker"),
     "model_checker_data": Path("03_ModelChecker") / DATA_NAME,
 }

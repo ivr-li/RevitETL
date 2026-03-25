@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ClashRunner.Automation": {
+      "commandName": "Project",
+      "commandLineArgs": "& \"C:\\Program Files\\Autodesk\\Navisworks Manage 2022\\ClashRunner.Automation.exe\" --nwd-dir \"\\\\fs\\bim\\Projects\\00.BIM_Export\\Export_nwd\\03. NWD folders\\NBR_TGN_GP03\" --nwf \"\\\\fs\\bim\\Projects\\00.BIM_Export\\Export_nwd\\03. NWD folders\\NBR_TGN_GP03\\NBR_TGN_GP03_Проверка на пересечения.nwf\" --output \"\\\\fs\\bim\\Projects\\00.BIM_Export\\Export_nwd\\03. NWD folders\\NBR_TGN_GP03\\Новая папка\""
+    }
+  }
+}

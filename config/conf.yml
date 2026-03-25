@@ -2,50 +2,57 @@ defaults:
   navisworks_exe: C:\Program Files\Autodesk\Navisworks Manage 2022\FileToolsTaskRunner.exe
   signal_max_workers: 9
   bim_agent_url: http://host.docker.internal:8000
+  output_path: \\fs\bim\Projects\00.BIM_Export\Tests_zone
   export_files: &id001
-  - 01.Сборка_Общая.rvt
-  - 02.Сборка_Архитектура.rvt
-  - 03.1 Сборка_Конструктив.rvt
-  - 03.3 Сборка_Конструктив и Инженерные сети.rvt
-  - 04.1 Сборка_Коробка здания.rvt
-  - 04.2 Сборка_Коробка здания и Инженерные сети.rvt
-  - 05.Сборка_Отопление и Вентиляция.rvt
-  - 06.Сборка_Водоснабжение и Водоотведение.rvt
-  - 07.Сборка_Общая Инженерные сети.rvt
-  - 99_AS.rvt
-  - 99_SC.rvt
+    - 01.Сборка_Общая.rvt
+    - 02.Сборка_Архитектура.rvt
+    - 03.1 Сборка_Конструктив.rvt
+    - 03.3 Сборка_Конструктив и Инженерные сети.rvt
+    - 04.1 Сборка_Коробка здания.rvt
+    - 04.2 Сборка_Коробка здания и Инженерные сети.rvt
+    - 05.Сборка_Отопление и Вентиляция.rvt
+    - 06.Сборка_Водоснабжение и Водоотведение.rvt
+    - 07.Сборка_Общая Инженерные сети.rvt
+    - 99_AS.rvt
+    - 99_SC.rvt
   xml_template: Проверка_файлов.xml
 projects:
-  KGN_GP5.2:
-    name: Курган 5.2
-    folder_name: KGN_GP5.2
-    output_path: C:\Users\dved\Desktop\RVT_ETL_tests
+  testp:
+    name: Тестовая зона
+    folder_name: testp
+    output_path: \\fs\bim\Projects\00.BIM_Export\Tests_zone
     export:
-      source_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\02_NWD
-      files: *id001
+      source_path: \\fs\bim\Projects\KRGN_MK\PD\GP5.2\98.CRD\02_NWD
+      files:
+        - 99_AS.rvt
+        - 99_AC.rvt
     signal:
-      project_id: 78048844-62a6-47e6-9f99-f9869fd875e2
-      folder_id: 285c6b6f-303c-4f09-b54f-427696956396
-      filter: Сборка
-  KGN_GP06:
-    name: Курган ГП5.6
-    folder_name: KGN_GP06
-    output_path: C:\Users\dved\Desktop\RVT_ETL_tests
+      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
+      folder_id: 019d0a15-943b-73fe-86d9-02b24c36c3c6
+      filter: _
+  testp2:
+    name: ТЕстовая выгрущзка2
+    folder_name: testp2
+    output_path: \\fs\bim\Projects\00.BIM_Export\Tests_zone
     export:
-      source_path: C:\Users\dved\Desktop\RVT_ETL_tests\KGN_GP5.2\02_NWD
-      files: *id001
+      source_path: \\fs\bim\Projects\OMSK_PKN\PD\GP2.2-3\98.CRD\02_NWD
+      files:
+        - 99_AS.rvt
+        - 99_AC.rvt
     signal:
-      project_id: Ввредите код project из ссылки
-      folder_id: Ввредите код folder из ссылки
-      filter: Сборка
-  TMN_RTM_GP08:
-    name: тюмень ритмы ГП08
-    folder_name: TMN_RTM_GP08
-    output_path: C:\Users\dved\Desktop\RVT_ETL_tests
+      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
+      folder_id: 019d0a15-8593-7364-b55d-e75ac702b199
+      filter: _
+  testp3:
+    name: ТЕстовая выгрущзка3
+    folder_name: testp3
+    output_path: \\fs\bim\Projects\00.BIM_Export\Tests_zone
     export:
-      source_path: C:\Users\dved\Desktop\RVT_ETL_tests\TMN_RTM_GP08\02_NWD
-      files: *id001
+      source_path: \\fs\bim\Projects\OMSK_PKN\PD\GP1.3\98.CRD\02_NWD
+      files:
+        - 99_AS.rvt
+        - 99_AC.rvt
     signal:
-      project_id: Ввредите код project из ссылки
-      folder_id: Ввредите код folder из ссылки
-      filter: Сборка
+      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
+      folder_id: 019d0a15-a477-7e68-aa76-4a270daf58de
+      filter: _

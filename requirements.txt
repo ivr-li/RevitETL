@@ -2,7 +2,7 @@
 fastapi
 uvicorn
 streamlit
-
+lxml=6.0.2
 # DAGs libs
 apache-airflow
 requests

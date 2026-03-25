@@ -2,100 +2,45 @@ import mimetypes
 import os
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 import time
+import traceback
+from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 from uuid import UUID
 
 import requests
 from dotenv import load_dotenv
+from lxml import etree
 
 from bim_agent.services.config import DIRS, PROJECTS
 
-COMPLETE_MARKER = "Завершено"
-LOG_POLL_INTERVAL = 30
-LOG_POLL_TIMEOUT = 25200  # The average export time is 7 hours
+dotenv_path = Path(__file__).parent.parent.parent / ".env"
+load_dotenv(dotenv_path)
 
 
-class Runner:
-    def __init__(self, uploader: "SignalUploader"):
-        self.uploader = uploader
+class BaseXMLTask(ABC):
+    def __init__(self, folder_name: str, output_path: Union[str, Path]):
+        self.folder_name = folder_name
+        self.base_path = Path(output_path) / self.folder_name / DIRS["collisions_data"]
+        self.pattern = re.compile(r"<clashresult\b[^>]*>(.*?)</clashresult>", re.DOTALL)
+        self.xml_file = self.base_path / DIRS["collisions_file"]
 
-    def run_nwd_export(self, folders: list[str], output_path: Union[str, Path]) -> None:
-        tasks = [NWDData(folder, output_path) for folder in folders]
-        successful, failed = self._run_export_tasks(tasks)
-        self._upload_to_signal(successful, output_path)
-
-    def split_coll_xml(self):
+    @abstractmethod
+    def run(self) -> None:
         pass
-
-    def create_mc_data(self):
-        pass
-
-    def _run_export_tasks(
-        self, tasks: list["NWDData"]
-    ) -> tuple[list[str], list[tuple[str, str]]]:
-        successful: list[str] = []
-        failed: list[tuple[str, str]] = []
-
-        with ThreadPoolExecutor(max_workers=3) as pool:
-            futures = {pool.submit(t.run): t for t in tasks}
-            for future in as_completed(futures):
-                task = futures[future]
-                try:
-                    future.result()
-                    successful.append(task.folder_name)
-                except Exception as ex:
-                    failed.append((task.folder_name, str(ex)))
-
-        return successful, failed
-
-    def _upload_to_signal(
-        self, folders: list[str], output_path: Union[str, Path]
-    ) -> None:
-        file_list: list[tuple[str, str, None]] = []
-
-        for folder in folders:
-            file_list.extend(self._collect_upload_files(folder, output_path))
-
-        self.uploader.upload_files_parallel(file_list)
-
-    def _collect_upload_files(
-        self, folder: str, output_path: Union[str, Path]
-    ) -> list[tuple[str, str, None]]:
-        project_conf = PROJECTS.get(folder, {})
-        signal_conf = project_conf.get("signal", {})
-        project_id = signal_conf.get("project_id", "")
-        folder_id = signal_conf.get("folder_id", "")
-
-        self._validate_uuid(project_id, "project_id")
-        self._validate_uuid(folder_id, "folder_id")
-
-        nwd_dir = Path(output_path) / folder / DIRS["nwd"]
-        signal_filter = signal_conf.get("filter", "")
-        to_url = f"https://app.sgnl.pro/projects/{project_id}/folders/{folder_id}"
-
-        return [
-            (str(f), to_url, None)
-            for f in nwd_dir.glob("*.nwd")
-            if signal_filter in f.name
-        ]
-
-    @staticmethod
-    def _validate_uuid(value: str, name: str) -> None:
-        if not value:
-            raise ValueError(f"{name} не задан в conf.yml")
-
-        try:
-            UUID(value, version=4)
-        except ValueError:
-            raise ValueError(f"Неверный {name}: {value}")
 
 
 class NWDData:
+    COMPLETE_MARKER = "Завершено"
+    LOG_POLL_INTERVAL = 30
+    LOG_POLL_TIMEOUT = 25200  # The average export time is 7 hours
+
     def __init__(self, folder_name: str, output_path: Union[str, Path]):
         pt = Path(output_path) if isinstance(output_path, str) else output_path
 
@@ -120,14 +65,13 @@ class NWDData:
 
     def _wait_for_log(self) -> None:
         elapsed = 0
-        while elapsed < LOG_POLL_TIMEOUT:
+        while elapsed < self.LOG_POLL_TIMEOUT:
             if self._is_complete():
                 return
+            time.sleep(self.LOG_POLL_INTERVAL)
+            elapsed += self.LOG_POLL_INTERVAL
 
-            time.sleep(LOG_POLL_INTERVAL)
-            elapsed += LOG_POLL_INTERVAL
-
-        raise TimeoutError(f"{self.folder_name}: timeout {LOG_POLL_TIMEOUT}s")
+        raise TimeoutError(f"{self.folder_name}: timeout {self.LOG_POLL_TIMEOUT}s")
 
     def _is_complete(self) -> bool:
         if not self.log_file.exists():
@@ -135,12 +79,190 @@ class NWDData:
 
         content = self.log_file.read_text(encoding="utf-8", errors="ignore")
 
-        return COMPLETE_MARKER in content
+        return self.COMPLETE_MARKER in content
 
 
-class CollisionsData:
-    def __init__(self):
-        pass
+class CleanXMLData(BaseXMLTask):
+    def __init__(self, folder_name: str, output_path: Union[str, Path]):
+        super().__init__(folder_name, output_path)
+
+    def run(self) -> None:
+        """
+        Cleaning and splitting into separate files
+        """
+        parent_path = self.base_path.parent
+        backup_dir = self._create_backup()
+        self._move_ex_files(parent_path, backup_dir)
+
+        if not self.xml_file:
+            print(f"XML файл не найден в {self.base_path}")
+            return
+
+        unique_names = self._extract_unique_names(self.xml_file)
+        xml_text = self.xml_file.read_text(encoding="utf-8")
+
+        for name in unique_names:
+            filtered = self._filter_xml(xml_text, name)
+            out_file = parent_path / f"{name}.xml"
+            out_file.write_text(filtered, encoding="utf-8")
+            print(f"Создан файл: {out_file}")
+
+        self._copy_files_folders(parent_path)
+        print(f"Готово: {self.folder_name}")
+
+    def _create_backup(self) -> Path:
+        date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        backup_dir = self.base_path / f"archive_{date_str}"
+        print(self.base_path)
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        return backup_dir
+
+    def _move_ex_files(self, parent: Path, backup: Path) -> None:
+        for item in parent.iterdir():
+            if item.suffix == ".xml" or item.name.endswith("_files"):
+                try:
+                    shutil.move(str(item), str(backup / item.name))
+                except Exception as e:
+                    print(f"Ошибка перемещения {item.name}: {e}")
+
+    def _find_xml(self) -> Optional[Path]:
+        for file in self.base_path.glob("*.xml"):
+            return file
+        return None
+
+    def _extract_unique_names(self, xml_file: Path) -> List[str]:
+        parser = etree.XMLParser(remove_blank_text=False)
+        tree = etree.parse(str(xml_file), parser)
+        root = tree.getroot()
+
+        names = set()
+        for clash in root.findall(".//clashresult"):
+            obj = clash.find(".//clashobject")
+            if obj is not None:
+                for tag in obj.findall(".//smarttag/value"):
+                    if tag.text and tag.text.endswith(".rvt"):
+                        name = Path(tag.text).stem
+                        names.add(name)
+        return list(names)
+
+    def _filter_xml(self, xml_text: str, keyword: str) -> str:
+        def keep_block(match):
+            block = match.group(1)
+            obj = re.search(
+                r"<clashobject\b[^>]*>(.*?)</clashobject>", block, re.DOTALL
+            )
+            return match.group(0) if obj and keyword in obj.group(1) else ""
+
+        return self.pattern.sub(keep_block, xml_text)
+
+    def _copy_files_folders(self, destination: Path) -> None:
+        for item in self.base_path.iterdir():
+            if item.is_dir() and item.name.endswith("_files"):
+                dest = destination / item.name
+                try:
+                    shutil.copytree(item, dest, dirs_exist_ok=True)
+                except Exception as e:
+                    print(f"Ошибка копирования {item.name}: {e}")
+
+
+class UpdateXMLData(BaseXMLTask):
+    def __init__(self, folder_name: str, output_path: Union[str, Path]):
+        super().__init__(folder_name, output_path)
+
+    def run(self) -> None:
+        """
+        Основной запуск обновления XML
+        """
+        clashresult_dict = self._build_clashresult_dict()
+
+        if not clashresult_dict:
+            print(f"Нет данных для обновления в {self.folder_name}")
+            return
+
+        self._update_xml_file(clashresult_dict)
+
+    def _build_clashresult_dict(self) -> Dict[str, str]:
+        """
+        Собирает clashresult из ВСЕХ XML файлов в родительской папке
+        """
+        result: Dict[str, str] = {}
+
+        xml_files = list(self.base_path.parent.glob("*.xml"))
+
+        if not xml_files:
+            print(f"В папке {self.base_path.parent} не найдено XML файлов")
+            return result
+
+        for xml_file in xml_files:
+            print(f"Обрабатываем файл: {xml_file.name}")
+
+            try:
+                content = xml_file.read_text(encoding="utf-8")
+
+                for match in self.pattern.finditer(content):
+                    block = match.group(0)
+
+                    guid_match = re.search(r'guid="([^"]+)"', block)
+                    if guid_match:
+                        guid = guid_match.group(1)
+                        result[guid] = block
+
+            except Exception as e:
+                print(f"Ошибка чтения {xml_file}: {e}")
+
+        print(f"Собрано {len(result)} clashresult для {self.folder_name}")
+        return result
+
+    def _update_xml_file(self, clashresult_dict: Dict[str, str]) -> None:
+        """
+        Обновляет целевой XML файл
+        """
+        target_xml = next(self.base_path.glob("*.xml"), None)
+
+        if not target_xml:
+            print(f"Целевой XML не найден в {self.base_path}")
+            return
+
+        try:
+            content = target_xml.read_text(encoding="utf-8")
+        except Exception as e:
+            print(f"Ошибка чтения целевого XML {target_xml}: {e}")
+            return
+
+        found_guids = set()
+
+        def replacer(match):
+            block = match.group(0)
+
+            guid_match = re.search(r'guid="([^"]+)"', block)
+            if guid_match:
+                guid = guid_match.group(1)
+                found_guids.add(guid)
+
+                if guid in clashresult_dict:
+                    print(f"Замена для GUID {guid}")
+                    return clashresult_dict[guid]
+
+            return block
+
+        updated_content = self.pattern.sub(replacer, content)
+
+        new_guids = set(clashresult_dict.keys()) - found_guids
+        if new_guids:
+            print("Новые GUID, отсутствующие в целевом XML:")
+            for guid in new_guids:
+                print(guid)
+
+        if "</clashresult>" not in updated_content:
+            print("Проблема с закрывающими тегами </clashresult>!")
+
+        output_file = self.xml_file
+
+        try:
+            output_file.write_text(updated_content, encoding="utf-8")
+            print(f"Сохранено: {output_file}")
+        except Exception as e:
+            print(f"Ошибка записи файла {output_file}: {e}")
 
 
 class ModelCheckerData:
@@ -205,6 +327,7 @@ class SignalUploader:
                 "docs:viewer:execute",
             ],
         }
+
         headers: Dict[str, str] = {
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -213,11 +336,13 @@ class SignalUploader:
         try:
             response = requests.post(url, json=payload, headers=headers)
             response.raise_for_status()
+
             self.auth_token = response.json().get("token")
             self.headers = {
                 "Authorization": f"Bearer {self.auth_token}",
                 "Content-Type": "application/json",
             }
+
             return self.auth_token is not None
         except requests.RequestException:
             return False
@@ -226,10 +351,13 @@ class SignalUploader:
     def extract_ids(url: str) -> Tuple[str, str]:
         regex: str = r"projects/([a-f0-9\-]+).*folders/([a-f0-9\-]+)"
         match = re.search(regex, url)
+
         if match:
             project_id: str = match.group(1)
             folder_id: str = match.group(2)
+
             return project_id, folder_id
+
         raise ValueError("Не удалось извлечь ProjectId и FolderId")
 
     @staticmethod
@@ -246,9 +374,11 @@ class SignalUploader:
             "size": size,
             "projectId": project_id,
         }
+
         response = requests.put(url, headers=self.headers, json=body)
         response.raise_for_status()
         data: Dict[str, Any] = response.json()
+
         return data["signedUrl"], data["objectId"]
 
     @staticmethod
@@ -377,17 +507,130 @@ class SignalUploader:
         return cls(), files_to_upload
 
 
-# Использование
-if __name__ == "__main__":
-    SIGNAL_PATHS = r"\\fs\bim\Projects\00.BIM_Export\Export_nwd\00. Пути в SIGNAL.txt"
-    NWD_PATCH = r"\\fs\bim\Projects\00.BIM_Export\Export_nwd"
+class Runner:
+    def __init__(self, uploader: SignalUploader):
+        self.uploader = uploader
 
-    uploader, files_to_upload = SignalUploader.from_signal_paths(
-        SIGNAL_PATHS, NWD_PATCH
-    )
-    SignalUploader.upload_files_parallel(files_to_upload, max_workers=9)
+    def run_nwd_export(self, folders: list[str], output_path: Union[str, Path]):
+        tasks = [NWDData(folder, output_path) for folder in folders]
+        successful, failed = self._run_export_tasks(tasks)
+        print(
+            "\nNWD_export finished:", f"successful - {successful}", f"failed - {failed}"
+        )
+        # self._upload_to_signal(successful, output_path)
+        print("выгрузка в сингла прошла")
+        return successful, failed
 
-# Runner().run_nwd_export(
-#     foldefs=["KGN_GP06"],
-#     output_path=r"\\fs\bim\Projects\00.BIM_Export\Tests_zone",
-# )
+    def xml_export(
+        self,
+        folders: list[str],
+        output_path: Union[str, Path],
+        nwd_success: Optional[list[str]],
+    ) -> None:
+        if nwd_success:
+            folders = [f for f in folders if f in nwd_success]
+
+        # Update
+        update_tasks: list[BaseXMLTask] = [
+            UpdateXMLData(folder, output_path) for folder in folders
+        ]
+
+        update_success, update_failed = self._run_export_tasks(update_tasks)
+
+        print(
+            "\nUpdate stage finished:",
+            f"successful - {update_success}",
+            f"failed - {update_failed}",
+        )
+
+        # Clean
+        clean_folders = update_success
+
+        clean_tasks: list[BaseXMLTask] = [
+            CleanXMLData(folder, output_path) for folder in clean_folders
+        ]
+
+        clean_success, clean_failed = self._run_export_tasks(clean_tasks)
+
+        print(
+            "\nClean stage finished:",
+            f"successful - {clean_success}",
+            f"failed - {clean_failed}",
+        )
+
+    def run_full_pipeline(
+        self, folders: list[str], output_path: Union[str, Path]
+    ) -> None:
+        """
+        Runs all tasks sequentially for each folder
+        """
+        successful, failed = self.run_nwd_export(folders, output_path)
+        self.xml_export(folders, output_path, successful)
+        print("\n=== Пайплайн завершён ===")
+
+    def _run_export_tasks(
+        self, tasks: Union[Sequence[BaseXMLTask], list[NWDData]]
+    ) -> tuple[list[str], list[tuple[str, str]]]:
+        successful: list[str] = []
+        failed: list[tuple[str, str]] = []
+
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            futures = {pool.submit(t.run): t for t in tasks}
+            for future in as_completed(futures):
+                task = futures[future]
+                try:
+                    future.result()
+                    successful.append(task.folder_name)
+                except Exception as ex:
+                    failed.append((task.folder_name, str(ex)))
+                    print(f"✗ Ошибка в {task.folder_name}:\n{traceback.format_exc()}")
+
+        return successful, failed
+
+    def _upload_to_signal(
+        self, folders: list[str], output_path: Union[str, Path]
+    ) -> None:
+        file_list: list[tuple[str, str, None]] = []
+
+        for folder in folders:
+            file_list.extend(self._collect_upload_files(folder, output_path))
+        self.uploader.upload_files_parallel(file_list)
+
+    def _collect_upload_files(
+        self, folder: str, output_path: Union[str, Path]
+    ) -> list[tuple[str, str, None]]:
+        project_conf = PROJECTS.get(folder, {})
+        signal_conf = project_conf.get("signal", {})
+        project_id = signal_conf.get("project_id", "")
+        folder_id = signal_conf.get("folder_id", "")
+
+        self._validate_uuid(project_id, "project_id")
+        self._validate_uuid(folder_id, "folder_id")
+
+        nwd_dir = Path(output_path) / folder / DIRS["nwd"]
+        signal_filter = signal_conf.get("filter", "")
+        to_url = f"https://app.sgnl.pro/projects/{project_id}/folders/{folder_id}"
+
+        return [
+            (str(f), to_url, None)
+            for f in nwd_dir.glob("*.nwd")
+            if signal_filter in f.name
+        ]
+
+    @staticmethod
+    def _validate_uuid(value: str, name: str) -> None:
+        if not value:
+            raise ValueError(f"{name} не задан в conf.yml")
+
+        try:
+            UUID(value, version=4)
+        except ValueError:
+            raise ValueError(f"Неверный {name}: {value}")
+
+
+Runner(SignalUploader()).xml_export(
+    # folders=["testp", "testp2", "testp3"],
+    folders=["KGN_GP5.2"],
+    output_path=r"\\fs\bim\Projects\00.BIM_Export\Tests_zone",
+    nwd_success=None,
+)

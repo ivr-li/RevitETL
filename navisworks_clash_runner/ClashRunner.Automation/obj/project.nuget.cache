@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "vtkb9Bt8fog=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\medvedev\\Desktop\\RevitETL\\navisworks_clash_runner\\ClashRunner.Automation\\ClashRunner.Automation.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\medvedev\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\medvedev\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net47\\1.0.3\\microsoft.netframework.referenceassemblies.net47.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

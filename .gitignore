@@ -5,6 +5,17 @@ old_ex/
 CLAUDE.md
 .zed/
 airflow/dags/templs
+
+navisworks_clash_runner/.vs/
+navisworks_clash_runner/.vs/ClashRunner.Automation/bin/
+navisworks_clash_runner/.vs/ClashRunner.Automation/obj/
+
+navisworks_clash_runner/.vs/ClashRunner.Plugin/bin/
+navisworks_clash_runner/.vs/ClashRunner.Plugin/obj/
+
+navisworks_clash_runner/.vs/ClashRunner.Shared/bin/
+navisworks_clash_runner/.vs/ClashRunner.Shared/obj/
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 config/02_Проверки_v4.1.xml
@@ -156,12 +167,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
-
-# End of https://www.toptal.com/developers/gitignore/api/python

@@ -24,12 +24,14 @@ This copies `ClashRunner.Plugin.dll` + `ClashRunner.Shared.dll` to:
 `%AppData%\Autodesk\ApplicationPlugins\ClashRunner.bundle\`
 
 ## Usage
-
 ```bash
-ClashRunner.Automation.exe ^
-  --nwd-dir "\\fs\bim\Projects\KGN_GP5.2\01_NWD" ^
-  --clash-settings "\\fs\bim\Templates\clash_tests.xml" ^
-  --output "\\fs\bim\Projects\KGN_GP5.2\02_Collisions"
+ & "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" NavisworksClashRunner.sln /p:Configuration=Release
+```
+```bash
+C:\Program Files\Autodesk\Navisworks Manage 2022\ClashRunner.Automation.exe
+    --nwd-dir "\\fs\bim\Projects\00.BIM_Export\Export_nwd\03. NWD folders\NBR_TGN_GP03" 
+    --nwf "\\fs\bim\Projects\00.BIM_Export\Export_nwd\03. NWD folders\NBR_TGN_GP03\NBR_TGN_GP03_Проверка на пересечения.nwf" 
+    --output "\\fs\bim\Projects\00.BIM_Export\Export_nwd\03. NWD folders\NBR_TGN_GP03\Новая папка"
 ```
 ```bash
 C:/path/to/ClashRunner.Automation/bin/Release/ClashRunner.Automation.exe \

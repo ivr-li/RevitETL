@@ -1,0 +1,15 @@
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\bin\Debug\net47\ClashRunner.Automation.exe.config
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\bin\Debug\net47\ClashRunner.Automation.exe
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\bin\Debug\net47\ClashRunner.Automation.pdb
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\bin\Debug\net47\ClashRunner.Shared.dll
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\bin\Debug\net47\ClashRunner.Shared.pdb
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.csproj.AssemblyReference.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.exe.config
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.AssemblyInfoInputs.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.AssemblyInfo.cs
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.csproj.CoreCompileInputs.cache
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.sourcelink.json
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRun.28C01522.Up2Date
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.exe
+C:\Users\medvedev\Desktop\RevitETL\navisworks_clash_runner\ClashRunner.Automation\obj\Debug\net47\ClashRunner.Automation.pdb
