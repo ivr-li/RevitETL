@@ -24,7 +24,6 @@ DEFAULT_CONFIG: dict[str, Any] = {
             "99_AS.rvt",
             "99_SC.rvt",
         ],
-        "xml_template": "Проверка_файлов.xml",
         "check_mappings": {
             "02.Сборка_Архитектура.rvt": [
                 {
@@ -66,6 +65,36 @@ DEFAULT_CONFIG: dict[str, Any] = {
 }
 
 
+def build_xml_checker_template(
+    check_mappings: dict[str, list[dict[str, str]]],
+) -> str:
+    lines = [
+        '<?xml version="1.0" encoding="utf-8" ?>',
+        "",
+        '<AutomatedRun Cleanup="None">',
+    ]
+
+    for rvt_file, checks in check_mappings.items():
+        lines.append("")
+        lines.append(f'  <Model Path="{{rvt_dir}}\\{rvt_file}">')
+        for check in checks:
+            template = check.get("template", "")
+            output = check.get("output", "")
+            lines.append("")
+            lines.append("    <CheckSet")
+            lines.append(f'      Path="{{check_dir}}\\{template}"')
+            lines.append('      ExportExcel="true"')
+            lines.append(f'      ExcelPath="{{check_export}}\\{output}"')
+            lines.append('      CheckLinks="true"')
+            lines.append("    />")
+        lines.append("")
+        lines.append("  </Model>")
+
+    lines.append("")
+    lines.append("</AutomatedRun>")
+    return "\n".join(lines)
+
+
 class ConfigManager:
     def __init__(self, path: Path = CONFIG_PATH) -> None:
         self.path: Path = path
@@ -88,10 +117,6 @@ class ConfigManager:
         return self.defaults.get("output_path", "")
 
     @property
-    def default_xml_template(self) -> str:
-        return self.defaults.get("xml_template", "")
-
-    @property
     def default_check_mappings(self) -> dict[str, list[dict[str, str]]]:
         return self.defaults.get("check_mappings", {})
 
@@ -105,6 +130,7 @@ class ConfigManager:
 
     def save(self) -> None:
         self._resolve_default_files()
+        self._rebuild_xml_checker_template()
 
         with open(self.path, "w", encoding="utf-8") as f:
             yaml.dump(
@@ -151,6 +177,11 @@ class ConfigManager:
                 merged[key] = value
 
         return merged
+
+    def _rebuild_xml_checker_template(self) -> None:
+        mappings = self.default_check_mappings
+        if mappings:
+            self.defaults["xml_checker_template"] = build_xml_checker_template(mappings)
 
     def _resolve_default_files(self) -> None:
         for project in self.projects.values():

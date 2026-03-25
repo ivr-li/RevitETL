@@ -1,7 +1,6 @@
 import streamlit as st
+from config import ConfigManager, build_xml_checker_template
 from forms import FORM_FIELDS, ProjectForm
-
-from config import ConfigManager
 
 
 class AdminApp:
@@ -43,53 +42,6 @@ class AdminApp:
                 height=200,
                 key="global_export_files",
             )
-            xml_template = st.text_input(
-                "XML шаблон",
-                value=self.manager.default_xml_template,
-                key="global_xml_template",
-            )
-
-            # --- Редактор check_mappings (сворачиваемый) ---
-            with st.expander("⚙️ Проверки (check_mappings)", expanded=False):
-                mappings = self.manager.default_check_mappings.copy()
-                rvt_files = self.manager.default_files
-
-                selected = st.selectbox(
-                    "Файл:",
-                    options=[""] + list(rvt_files),
-                    key="cm_select_rvt_sidebar",
-                )
-
-                if selected:
-                    checks = mappings.setdefault(selected, [])
-                    st.caption(f"Проверки для {selected}")
-
-                    for i, chk in enumerate(checks):
-                        c1, c2, c3 = st.columns([2, 2, 1])
-                        with c1:
-                            chk["template"] = st.text_input(
-                                "Шаблон",
-                                value=chk.get("template", ""),
-                                key=f"sb_tpl_{selected}_{i}",
-                            )
-                        with c2:
-                            chk["output"] = st.text_input(
-                                "Excel",
-                                value=chk.get("output", ""),
-                                key=f"sb_out_{selected}_{i}",
-                            )
-                        with c3:
-                            if st.button("✕", key=f"sb_del_{selected}_{i}"):
-                                checks.pop(i)
-                                st.rerun()
-
-                    if st.button("+ Проверка", key=f"sb_add_{selected}"):
-                        checks.append({"template": "", "output": ""})
-                        st.rerun()
-
-                    if st.button("🗑️ Удалить файл", key=f"sb_del_file_{selected}"):
-                        mappings.pop(selected, None)
-                        st.rerun()
 
             # --- Кнопка сохранения ---
             if st.button("💾 Сохранить всё"):
@@ -100,8 +52,6 @@ class AdminApp:
                     {
                         "output_path": output_path,
                         "export_files": files,
-                        "xml_template": xml_template,
-                        "check_mappings": mappings,  # ← сохраняем и маппинги
                     }
                 )
                 st.success("Сохранено")
@@ -156,8 +106,9 @@ class AdminApp:
             st.success("Сохранено")
             st.rerun()
 
-        with st.expander("🔍 Просмотр YAML-структуры"):
-            st.json(mappings, expanded=False)
+        with st.expander("Просмотр XML-шаблона"):
+            xml_preview = build_xml_checker_template(mappings)
+            st.code(xml_preview, language="xml")
 
     def _render_projects(self) -> None:
         if not self.manager.projects:

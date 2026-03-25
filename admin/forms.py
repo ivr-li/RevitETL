@@ -7,10 +7,8 @@ FORM_FIELDS: list[str] = [
     "folder",
     "source",
     "files",
-    "pid",
-    "fid",
+    "signal_url",
     "filter",
-    "dpath",
 ]
 
 
@@ -78,23 +76,13 @@ class ProjectForm:
     def _render_signal(self) -> None:
         st.subheader("Отправка NWD в SignalDocs")
         signal = self.project.get("signal", {})
-        col1, col2 = st.columns(2)
 
-        with col1:
-            st.text_input(
-                "Project ID",
-                value=signal.get("project_id", "Ввредите код project из ссылки"),
-                key=f"{self.prefix}_pid",
-                help="ID проекта из ссылки SIGNAL: https://docs.sgnl.pro/projects/<PROJECT_ID>/folders/<FOLDER_ID>",
-            )
-
-        with col2:
-            st.text_input(
-                "Folder ID",
-                value=signal.get("folder_id", "Ввредите код folder из ссылки"),
-                key=f"{self.prefix}_fid",
-                help="ID проекта из ссылки SIGNAL: https://docs.sgnl.pro/projects/<PROJECT_ID>/folders/<FOLDER_ID>",
-            )
+        st.text_input(
+            "Ссылка на папку SIGNAL",
+            value=signal.get("signal_url", ""),
+            key=f"{self.prefix}_signal_url",
+            placeholder="https://docs.sgnl.pro/projects/.../folders/...",
+        )
 
         st.text_input(
             "Фильтр", value=signal.get("filter", "Сборка"), key=f"{self.prefix}_filter"
@@ -120,16 +108,7 @@ class ProjectForm:
                 "files": files,
             },
             "signal": {
-                "project_id": session[f"{pref}_pid"],
-                "folder_id": session[f"{pref}_fid"],
+                "signal_url": session[f"{pref}_signal_url"],
                 "filter": session[f"{pref}_filter"],
             },
-            # "collisions": {
-            #     "coll_path": rf"{output_path}\collisions",
-            #     "data_path": rf"{output_path}\00_Data",
-            # },
-            # "modelchecker": {
-            #     "coll_path": rf"{output_path}\ModelChecker",
-            #     "data_path": rf"{output_path}\00_DataChecker",
-            # },
         }

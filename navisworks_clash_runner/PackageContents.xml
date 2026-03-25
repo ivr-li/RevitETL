@@ -14,16 +14,17 @@
   <CompanyDetails Name="RevtiETL" />
 
   <Components Description="Main components">
-    <RuntimeRequirements
-      OS="Win64"
-      Platform="NAVMAN"
-      SeriesMin="Nw19"
-      SeriesMax="Nw25" />
     <ComponentEntry
       AppName="ClashRunner"
       AppType="ManagedPlugin"
       ModuleName="./Contents/ClashRunner.Plugin.dll"
-      AppDescription="Automated clash detection runner" />
+      AppDescription="Automated clash detection runner">
+      <RuntimeRequirements
+        OS="Win64"
+        Platform="NAVMAN"
+        SeriesMin="Nw19"
+        SeriesMax="Nw25" />
+    </ComponentEntry>
   </Components>
 
 </ApplicationPackage>

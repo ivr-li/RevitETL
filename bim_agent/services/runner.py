@@ -601,15 +601,17 @@ class Runner:
     ) -> list[tuple[str, str, None]]:
         project_conf = PROJECTS.get(folder, {})
         signal_conf = project_conf.get("signal", {})
-        project_id = signal_conf.get("project_id", "")
-        folder_id = signal_conf.get("folder_id", "")
+        to_url = signal_conf.get("signal_url", "")
 
+        if not to_url:
+            raise ValueError(f"{folder}: signal_url not set in conf.yml")
+
+        project_id, folder_id = SignalUploader.extract_ids(to_url)
         self._validate_uuid(project_id, "project_id")
         self._validate_uuid(folder_id, "folder_id")
 
         nwd_dir = Path(output_path) / folder / DIRS["nwd"]
         signal_filter = signal_conf.get("filter", "")
-        to_url = f"https://app.sgnl.pro/projects/{project_id}/folders/{folder_id}"
 
         return [
             (str(f), to_url, None)

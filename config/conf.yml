@@ -15,7 +15,6 @@ defaults:
     - 07.Сборка_Общая Инженерные сети.rvt
     - 99_AS.rvt
     - 99_SC.rvt
-  xml_template: Проверка_файлов.xml
   check_mappings:
     02.Сборка_Архитектура.rvt:
       - template: MC_01_Проверка файла AR для Архитектора.xml
@@ -45,8 +44,7 @@ projects:
         - 99_AS.rvt
         - 99_AC.rvt
     signal:
-      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
-      folder_id: 019d0a15-943b-73fe-86d9-02b24c36c3c6
+      signal_url: https://docs.sgnl.pro/projects/2348ba1e-bece-4916-9433-c5dfd02784a3/folders/019d0a15-943b-73fe-86d9-02b24c36c3c6
       filter: _
   testp2:
     name: ТЕстовая выгрущзка2
@@ -58,8 +56,7 @@ projects:
         - 99_AS.rvt
         - 99_AC.rvt
     signal:
-      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
-      folder_id: 019d0a15-8593-7364-b55d-e75ac702b199
+      signal_url: https://docs.sgnl.pro/projects/2348ba1e-bece-4916-9433-c5dfd02784a3/folders/019d0a15-8593-7364-b55d-e75ac702b199
       filter: _
   testp3:
     name: ТЕстовая выгрущзка3
@@ -71,6 +68,5 @@ projects:
         - 99_AS.rvt
         - 99_AC.rvt
     signal:
-      project_id: 2348ba1e-bece-4916-9433-c5dfd02784a3
-      folder_id: 019d0a15-a477-7e68-aa76-4a270daf58de
+      signal_url: https://docs.sgnl.pro/projects/2348ba1e-bece-4916-9433-c5dfd02784a3/folders/019d0a15-a477-7e68-aa76-4a270daf58de
       filter: _
